@@ -2,9 +2,15 @@ from pathlib import Path
 
 
 class ObjectDetector:
-    def __init__(self, model_name: str = "models/shuttlecock.pt", confidence: float = 0.25) -> None:
+    def __init__(
+        self,
+        model_name: str = "models/shuttlecock.pt",
+        confidence: float = 0.25,
+        image_size: int = 1280,
+    ) -> None:
         self.model_name = model_name
         self.confidence = confidence
+        self.image_size = image_size
         self._model = None
 
     def _load_model(self):
@@ -30,5 +36,5 @@ class ObjectDetector:
 
     def detect(self, frame):
         model = self._load_model()
-        results = model(frame, conf=self.confidence, verbose=False)
+        results = model(frame, conf=self.confidence, imgsz=self.image_size, verbose=False)
         return results[0]

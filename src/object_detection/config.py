@@ -8,6 +8,7 @@ class ObjectDetectionConfig:
     output_dir: Path = Path("data/results/videos")
     model_name: str = "models/shuttlecock.pt"
     confidence: float = 0.25
+    image_size: int = 1280
 
     @property
     def output_path(self) -> Path:

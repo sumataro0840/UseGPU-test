@@ -9,6 +9,7 @@ class ObjectDetectionApp:
         detector = ObjectDetector(
             model_name=self.config.model_name,
             confidence=self.config.confidence,
+            image_size=self.config.image_size,
         )
         self.video_processor = VideoProcessor(detector)
 

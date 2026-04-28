@@ -34,6 +34,12 @@ def parse_args() -> argparse.Namespace:
         help="Detection confidence threshold.",
     )
     parser.add_argument(
+        "--image-size",
+        type=int,
+        default=1280,
+        help="YOLO inference image size. Larger values help small objects but run slower.",
+    )
+    parser.add_argument(
         "--frame-step",
         type=int,
         default=15,
@@ -60,11 +66,12 @@ def run_image_recognition(input_path: Path) -> None:
     app.run()
 
 
-def run_object_detection(input_path: Path, model_name: str, confidence: float) -> None:
+def run_object_detection(input_path: Path, model_name: str, confidence: float, image_size: int) -> None:
     config = ObjectDetectionConfig(
         video_path=input_path,
         model_name=model_name,
         confidence=confidence,
+        image_size=image_size,
     )
     app = ObjectDetectionApp(config)
     app.run()
@@ -98,7 +105,7 @@ def main() -> None:
         elif extension in IMAGE_EXTENSIONS:
             run_image_recognition(input_path)
         elif extension in VIDEO_EXTENSIONS:
-            run_object_detection(input_path, args.model, args.confidence)
+            run_object_detection(input_path, args.model, args.confidence, args.image_size)
         else:
             print(f"{extension or '拡張子なし'} は未対応です。画像か動画ファイルを指定してください。")
     except (FileNotFoundError, RuntimeError) as exc:

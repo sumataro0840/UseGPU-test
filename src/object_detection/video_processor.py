@@ -33,6 +33,8 @@ class VideoProcessor:
         writer = cv2.VideoWriter(str(output_path), fourcc, fps, (width, height))
 
         frame_count = 0
+        detected_frame_count = 0
+        detected_box_count = 0
         try:
             while True:
                 ok, frame = capture.read()
@@ -40,6 +42,10 @@ class VideoProcessor:
                     break
 
                 result = self.detector.detect(frame)
+                box_count = len(result.boxes)
+                if box_count > 0:
+                    detected_frame_count += 1
+                    detected_box_count += box_count
                 annotated_frame = result.plot()
                 writer.write(annotated_frame)
                 frame_count += 1
@@ -50,4 +56,7 @@ class VideoProcessor:
         if frame_count == 0:
             raise RuntimeError(f"{input_path} からフレームを読み込めませんでした。")
 
+        print(f"Processed frames: {frame_count}")
+        print(f"Detected frames: {detected_frame_count}")
+        print(f"Detected boxes: {detected_box_count}")
         return output_path
