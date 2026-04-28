@@ -1,4 +1,9 @@
+# Local tools
 .codex
+.codex/
+.venv/
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
@@ -9,11 +14,7 @@ __pycache__/
 *.bak
 *.tmp
 *.swp
-.DS_Store
-.idea/
-.vscode/
 *.env
-*.venv
 env/
 venv/
 ENV/
@@ -23,4 +24,45 @@ venv.bak/
 dist/
 build/
 *.egg
-*.egg-info/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+
+# Input media and generated outputs
+data/images/*
+data/videos/*
+data/results/*
+data/results/videos/*
+data/datasets/shuttlecock/images/unlabeled/*
+data/datasets/shuttlecock/images/train/*
+data/datasets/shuttlecock/images/val/*
+data/datasets/shuttlecock/labels/train/*
+data/datasets/shuttlecock/labels/val/*
+data/datasets/shuttlecock/labels/*.cache
+
+# Keep empty project folders
+!data/images/.gitkeep
+!data/videos/.gitkeep
+!data/results/.gitkeep
+!data/results/videos/
+!data/results/videos/.gitkeep
+!data/datasets/shuttlecock/images/train/.gitkeep
+!data/datasets/shuttlecock/images/val/.gitkeep
+!data/datasets/shuttlecock/labels/train/.gitkeep
+!data/datasets/shuttlecock/labels/val/.gitkeep
+
+# Model and training artifacts
+runs/
+*.pt
+!models/.gitkeep
+
+# Labeling exports
+exports/
+label-studio-export*/
+*.zip
+
+# Local screenshots and copied videos
+sample_detected.mp4
+スクリーンショット*.png
